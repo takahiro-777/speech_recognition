@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 #  http://qiita.com/yu_tailsfox/items/86380a0d4d016e1634f1
+# http://flat-leon.hatenablog.com/entry/python_argparse
 
 #modules import
 import argparse
@@ -7,6 +8,7 @@ import numpy as np
 import wave
 import matplotlib.pyplot as plt
 
+#functions
 def data_load(file_name):
     wavefile = wave.open(file_name, "r")
     framerate = wavefile.getframerate()
@@ -24,13 +26,16 @@ def data_export(data,file_name):
 
 def display_graph(data,start_time,period):
     flip=1
-    x = np.linspace(0, period, 44100*period)
-    start_pos = 44100*start_time
+    x = np.linspace(0, period, int(44100*period))
+    start_pos = int(44100*start_time)
+    #print(x.shape)
+    #print(data.shape)
     #for i in range(1, 7):
         #plt.plot(x, np.sin(x + i * .5) * (7 - i) * flip)
-    plt.plot(x, data[start_pos:(start_pos+44100*period)] * flip)
+    plt.plot(x, data[start_pos:(start_pos+int(44100*period))] * flip)
     plt.show()
 
+#main function
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--graph", type=bool, default=False)
