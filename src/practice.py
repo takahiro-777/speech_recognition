@@ -2,8 +2,10 @@
 #  http://qiita.com/yu_tailsfox/items/86380a0d4d016e1634f1
 
 #modules import
+import argparse
 import numpy as np
 import wave
+import matplotlib.pyplot as plt
 
 def data_load(file_name):
     wavefile = wave.open(file_name, "r")
@@ -20,13 +22,30 @@ def data_export(data,file_name):
     w.writeframes(data)
     w.close()
 
+def display_graph(data,start_time,period):
+    flip=1
+    x = np.linspace(0, period, 44100*period)
+    start_pos = 44100*start_time
+    #for i in range(1, 7):
+        #plt.plot(x, np.sin(x + i * .5) * (7 - i) * flip)
+    plt.plot(x, data[start_pos:(start_pos+44100*period)] * flip)
+    plt.show()
+
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--graph", type=bool, default=False)
+    args = parser.parse_args()
+
     input_path = "../data/ashitaka_sekki.wav"
     output_path = "../out_data/ashitaka_sekki.wav"
 
     #data import
     x = data_load(file_name=input_path)
     print(x.shape)
+
+    #graph display
+    if args.graph:
+        display_graph(data=x,start_time=4,period=2)
 
     #data export
     data_export(x,output_path)
