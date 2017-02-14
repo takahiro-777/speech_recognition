@@ -6,6 +6,7 @@
 import argparse
 import numpy as np
 import wave
+import pyaudio
 import matplotlib.pyplot as plt
 
 #functions
@@ -35,10 +36,31 @@ def display_graph(data,start_time,period):
     plt.plot(x, data[start_pos:(start_pos+int(44100*period))] * flip)
     plt.show()
 
+def playback(input_path):
+    #データの読み込み
+    wf = wave.open(input_path, "r")
+
+    # ストリームを開く
+    p = pyaudio.PyAudio()
+    stream = p.open(format=p.get_format_from_width(wf.getsampwidth()),
+                    channels=wf.getnchannels(),
+                    rate=wf.getframerate(),
+                    output=True)
+
+    # チャンク単位でストリームに出力し音声を再生
+    chunk = 1024
+    data = wf.readframes(chunk)
+    while data != '':
+        stream.write(data)
+        data = wf.readframes(chunk)
+    stream.close()
+    p.terminate()
+
 #main function
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--graph", type=bool, default=False)
+    parser.add_argument("--playback", type=bool, default=False)
     args = parser.parse_args()
 
     input_path = "../data/ashitaka_sekki.wav"
@@ -47,6 +69,10 @@ if __name__ == '__main__':
     #data import
     x = data_load(file_name=input_path)
     print(x.shape)
+
+    #playback
+    if args.playback:
+        playback(input_path=input_path)
 
     #graph display
     if args.graph:
