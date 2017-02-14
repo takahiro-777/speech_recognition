@@ -36,9 +36,22 @@ def display_graph(data,start_time,period):
     plt.plot(x, data[start_pos:(start_pos+int(44100*period))] * flip)
     plt.show()
 
+
+def printWaveInfo(wf):
+    """WAVEファイルの情報を取得"""
+    print "チャンネル数:", wf.getnchannels()
+    print "サンプル幅:", wf.getsampwidth()
+    print "サンプリング周波数:", wf.getframerate()
+    print "フレーム数:", wf.getnframes()
+    print "パラメータ:", wf.getparams()
+    print "長さ（秒）:", float(wf.getnframes()) / wf.getframerate()
+
 def playback(input_path):
     #データの読み込み
     wf = wave.open(input_path, "r")
+
+    #音声プロファイル
+    printWaveInfo(wf)
 
     # ストリームを開く
     p = pyaudio.PyAudio()
