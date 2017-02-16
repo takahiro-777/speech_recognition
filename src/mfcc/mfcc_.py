@@ -15,7 +15,7 @@ def wavread(filename):
 
 if __name__ == "__main__":
     # 音声をロード
-    wav, fs = wavread("../data/a.wav")
+    wav, fs = wavread("../mfcc_data/a.wav")
     t = np.arange(0.0, len(wav) / fs, 1/fs)
 
     # 音声波形の中心部分を切り出す

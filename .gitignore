@@ -1,2 +1,4 @@
 /data/*
 /out_data/*
+/download/*
+/src/mfcc/mfcc_data/*
