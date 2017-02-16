@@ -25,3 +25,14 @@ pyaudioを使用して和音の作成
 cd src/
 python make_chord.py
 ```
+
+###src/tone_difference.py
+pyaudioを使用して和音の作成
+```
+cd src/
+python tone_difference.py
+
+option
+--chord(bool) -> =TRUEで和音
+--soundtype(str) -> ="basic","triangle","square","sawtooth"から選択
+```
