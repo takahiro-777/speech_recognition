@@ -5,6 +5,12 @@
 音声認識をやるにあたり、学習した内容の結果をまとめていく
 ```
 
+## pipモジュールインストール
+```
+pip install -r requirements.txt
+brew install pyaudio
+pip install pyaudio
+```
 
 ## ファイル概要
 #### src/practice.py

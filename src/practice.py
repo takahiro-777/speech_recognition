@@ -39,12 +39,12 @@ def display_graph(data,start_time,period):
 
 def printWaveInfo(wf):
     """WAVEファイルの情報を取得"""
-    print "チャンネル数:", wf.getnchannels()
-    print "サンプル幅:", wf.getsampwidth()
-    print "サンプリング周波数:", wf.getframerate()
-    print "フレーム数:", wf.getnframes()
-    print "パラメータ:", wf.getparams()
-    print "長さ（秒）:", float(wf.getnframes()) / wf.getframerate()
+    print("チャンネル数:" + wf.getnchannels())
+    print("サンプル幅:" + wf.getsampwidth())
+    print("サンプリング周波数:" + wf.getframerate())
+    print("フレーム数:" + wf.getnframes())
+    print("パラメータ:" + wf.getparams())
+    print("長さ（秒）:" + float(wf.getnframes()) / wf.getframerate())
 
 def playback(input_path):
     #データの読み込み
